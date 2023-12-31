@@ -1,11 +1,28 @@
 package com.agro.entity;
+import java.util.List;
+import java.util.Set;
 
 import jakarta.persistence.*;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name="crop")
 public class Crop {
-	private int id;	//1
-	private String name;	//onion
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;	
+	
+	@Column(name="name")
+	private String name;
+	
+	@Enumerated(EnumType.STRING)
 	private CropType type;	//KHARIF
+	
+	@OneToOne(mappedBy = "crop")
+    private StorageReserve storage_reserve;
+
 	
 	public static enum CropType{
 		KHARIF , RABI , ZAID
@@ -34,5 +51,8 @@ public class Crop {
 	public void setType(CropType type) {
 		this.type = type;
 	}
+
+	
+	
 	
 }

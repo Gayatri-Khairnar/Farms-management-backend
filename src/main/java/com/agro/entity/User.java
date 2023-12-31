@@ -9,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -19,35 +20,41 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="user_id")
+	@Column(name="id")
 	private int id;
 	
+	@Column(name="name")
 	private String name;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name="gender")
 	private Gender gender;
-	private String email;
-	private long contactNo;
-	public long getContactNo() {
-		return contactNo;
-	}
-	public void setContactNo(long contactNo) {
-		this.contactNo = contactNo;
-	}
-
-	@ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
 	
+	@Column(name="email")
+	private String email;
+	
+	@Column(name="contact_no")
+	private long contactNo;
+
+	@Column(name="password")
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
+	@Column(name="status")
 	private Status status;
 	
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id",referencedColumnName = "id",nullable=false)
+    private Role role;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="addr_id")
-	private Address address;
+	@OneToOne(mappedBy = "User")
+    private PaymentHistory payment;
+	
 	
 	public static enum Status{
 		ACTIVE , INACTIVE;
@@ -79,6 +86,12 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public long getContactNo() {
+		return contactNo;
+	}
+	public void setContactNo(long contactNo) {
+		this.contactNo = contactNo;
+	}
 	public String getPassword() {
 		return password;
 	}
@@ -103,5 +116,6 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
 	
 }
