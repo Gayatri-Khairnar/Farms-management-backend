@@ -34,8 +34,17 @@ public class Address {
 	private int pincode;
 	
 	@OneToOne(mappedBy = "address")
-    private User user;
-
+	private User user;
+	
+	@OneToOne(mappedBy = "address")
+	private Warehouse warehouse;
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public int getId() {
 		return id;
 	}
@@ -90,9 +99,5 @@ public class Address {
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-	
-
-
-	
+	}	
 }

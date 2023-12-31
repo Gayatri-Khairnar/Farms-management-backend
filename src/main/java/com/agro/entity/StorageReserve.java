@@ -3,30 +3,18 @@ package com.agro.entity;
 import com.agro.entity.PaymentHistory;
 import com.agro.entity.User;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="storage_reserve")
+@Table(name="storagereserve")
 public class StorageReserve {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@Column(name="quantity_stored")
     private int quantity_stored;
     
-	//private PaymentHistory paymentHistory;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "warehouse_id", referencedColumnName = "id")
@@ -36,10 +24,21 @@ public class StorageReserve {
     @JoinColumn(name = "crop_id", referencedColumnName = "id")
     private Crop crop;
 
+	@OneToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
-	public int getQuantity_stored() {
-		return quantity_stored;
-	}
+	@OneToOne
+	@JoinColumn(name="warehouse_id")
+	private Warehouse warehouse;
+	
+	@OneToOne
+	@JoinColumn(name="crop_id")
+	private Crop crop;
+	
+	@OneToOne
+	@JoinColumn(name="paymenthistory_id")
+	private PaymentHistory paymentHistory;
 
 	public void setQuantity_stored(int quantity_stored) {
 		this.quantity_stored = quantity_stored;

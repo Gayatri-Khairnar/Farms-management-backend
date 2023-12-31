@@ -2,10 +2,15 @@ package com.agro.entity;
 import java.util.List;
 import java.util.Set;
 
+import com.agro.utils.Roles;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "role")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Role {
 
     @Id
@@ -16,7 +21,10 @@ public class Role {
     private String roleName;
     
     @OneToMany(mappedBy="role")
-    private Set<User> users;
+    private List<User> users;
+
+	@Enumerated(EnumType.STRING)
+    private Roles roleName;
     
     public static enum Roles {
         ADMIN, FARMER, BUYER;

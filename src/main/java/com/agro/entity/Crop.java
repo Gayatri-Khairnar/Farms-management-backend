@@ -11,11 +11,9 @@ public class Crop {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;	
-	
-	@Column(name="name")
-	private String name;
+	@Column(name="crop_id")
+	private int id;	//1
+	private String name;	//onion
 	
 	@Enumerated(EnumType.STRING)
 	private CropType type;	//KHARIF
@@ -50,9 +48,5 @@ public class Crop {
 
 	public void setType(CropType type) {
 		this.type = type;
-	}
-
-	
-	
-	
+	}	
 }

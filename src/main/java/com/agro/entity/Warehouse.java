@@ -11,6 +11,7 @@ import com.agro.entity.Address;
 public class Warehouse {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="warehouse_id")
 	private int id;
 	
 	@Column(name="name")
@@ -19,12 +20,17 @@ public class Warehouse {
 	@Column(name="capacity")
 	private int capacity;
 	
-	@OneToOne(mappedBy = "warehouse")
-    private StorageReserve storage_reserve;
+	@OneToOne
+	@JoinColumn(name="addr_id")
+	private Address address;
 
+	public int getId() {
+		return id;
+	}
 
-//	@OneToOne(mappedBy = "warehouse")
-//	private List<StorageReserve> storageReserves;
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	
 

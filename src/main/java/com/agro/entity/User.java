@@ -1,5 +1,8 @@
 package com.agro.entity;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,9 +16,12 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.transaction.Transactional;
 
 @Entity
 @Table(name="user")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@Transactional
 public class User {
 	
 	@Id
@@ -36,7 +42,10 @@ public class User {
 	@Column(name="contact_no")
 	private long contactNo;
 
-	@Column(name="password")
+	@ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id")
+    private Role role;
+	
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
