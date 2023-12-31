@@ -1,5 +1,8 @@
 package com.agro.entity;
+import java.util.List;
+import java.util.Set;
 
+import jakarta.persistence.*;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +17,10 @@ public class Crop {
 	
 	@Enumerated(EnumType.STRING)
 	private CropType type;	//KHARIF
+	
+	@OneToOne(mappedBy = "crop")
+    private StorageReserve storage_reserve;
+
 	
 	public static enum CropType{
 		KHARIF , RABI , ZAID
@@ -41,6 +48,5 @@ public class Crop {
 
 	public void setType(CropType type) {
 		this.type = type;
-	}
-	
+	}	
 }

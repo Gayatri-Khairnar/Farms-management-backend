@@ -19,9 +19,6 @@ import com.agro.utils.CommonConstant;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
-//import lombok.extern.slf4j.Slf4j;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
 
 //@Slf4j
 @RestController
@@ -43,23 +40,3 @@ public class UserController {
 		    return ResponseEntity.ok(response);
 	}
 }
-
-/*
- * @PostMapping("/customer/register")
-	public Status register(@RequestBody Customer customer) {
-		try {
-			int id = customerService.register(customer);
-			RegistrationStatus status = new RegistrationStatus();
-			status.setStatus(true);
-			status.setMessageIfAny("Registration successful!");
-			status.setCustomerId(id);
-			return status;
-		}
-		catch(CustomerServiceException e) {
-			Status status = new Status();
-			status.setStatus(false);
-			status.setMessageIfAny(e.getMessage());
-			return status;
-		}
-	}
- */

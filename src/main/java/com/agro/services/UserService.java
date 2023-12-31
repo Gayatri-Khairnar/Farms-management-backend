@@ -41,10 +41,6 @@ public class UserService {
 	@Transactional
 	public void registerUser(User user) throws GenricProcessException {
 		
-		
-		System.out.println("UUID ------------------------"+ UUID.randomUUID().toString());
-		
-		
 		validateRequest(user);
 		
 		try {
@@ -82,11 +78,3 @@ public class UserService {
 
    
 }
-/*Long count = customerRepository.findIfCustomerExists(customer.getEmail());
-		if(count == 1)
-			throw new CustomerServiceException("Customer already registered!");
-		else {
-			customerRepository.save(customer);
-			return customer.getId();
-		}
-	}*/
