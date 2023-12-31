@@ -2,9 +2,17 @@ package com.agro.entity;
 
 import jakarta.persistence.*;
 
+@Entity
+@Table(name="crop")
 public class Crop {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="crop_id")
 	private int id;	//1
 	private String name;	//onion
+	
+	@Enumerated(EnumType.STRING)
 	private CropType type;	//KHARIF
 	
 	public static enum CropType{

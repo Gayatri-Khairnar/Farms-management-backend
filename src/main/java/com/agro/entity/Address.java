@@ -28,6 +28,9 @@ public class Address {
 	@OneToOne(mappedBy = "address")
 	private User user;
 	
+	@OneToOne(mappedBy = "address")
+	private Warehouse warehouse;
+	
 	public User getUser() {
 		return user;
 	}

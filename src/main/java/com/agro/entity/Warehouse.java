@@ -2,11 +2,20 @@ package com.agro.entity;
 
 import com.agro.entity.Address;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="warehouse")
 public class Warehouse {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="warehouse_id")
 	private int id;
 	private String name;
 	private int capacity;
 	
+	@OneToOne
+	@JoinColumn(name="addr_id")
 	private Address address;
 
 	public int getId() {
