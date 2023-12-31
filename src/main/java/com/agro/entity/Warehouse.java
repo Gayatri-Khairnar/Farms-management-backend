@@ -1,44 +1,32 @@
 package com.agro.entity;
+import jakarta.persistence.*;
+
+import java.util.List;
+import java.util.Set;
 
 import com.agro.entity.Address;
 
+@Entity
+@Table(name="warehouse")
 public class Warehouse {
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name="name")
 	private String name;
+	
+	@Column(name="capacity")
 	private int capacity;
 	
-	private Address address;
+	@OneToOne(mappedBy = "warehouse")
+    private StorageReserve storage_reserve;
 
-	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+//	@OneToOne(mappedBy = "warehouse")
+//	private List<StorageReserve> storageReserves;
+	
+	
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getCapacity() {
-		return capacity;
-	}
-
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
 	
 }
