@@ -12,18 +12,7 @@ public class StorageReserve {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	@Column(name="quantity_stored")
-    private int quantity_stored;
-    
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "warehouse_id", referencedColumnName = "id")
-    private Warehouse warehouse;
-
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "crop_id", referencedColumnName = "id")
-    private Crop crop;
-
 	@OneToOne
 	@JoinColumn(name="user_id")
 	private User user;
@@ -40,9 +29,7 @@ public class StorageReserve {
 	@JoinColumn(name="paymenthistory_id")
 	private PaymentHistory paymentHistory;
 
-	public void setQuantity_stored(int quantity_stored) {
-		this.quantity_stored = quantity_stored;
-	}
+	private int reserve;
 
 	public int getId() {
 		return id;
@@ -52,12 +39,12 @@ public class StorageReserve {
 		this.id = id;
 	}
 
-	public Crop getCrop() {
-		return crop;
+	public User getUser() {
+		return user;
 	}
 
-	public void setCrop(Crop crop) {
-		this.crop = crop;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Warehouse getWarehouse() {
@@ -68,5 +55,20 @@ public class StorageReserve {
 		this.warehouse = warehouse;
 	}
 
+	public Crop getCrop() {
+		return crop;
+	}
 
+	public void setCrop(Crop crop) {
+		this.crop = crop;
+	}
+
+	public int getReserve() {
+		return reserve;
+	}
+
+	public void setReserve(int reserve) {
+		this.reserve = reserve;
+	}
+	
 }

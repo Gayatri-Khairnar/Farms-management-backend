@@ -1,34 +1,38 @@
 package com.agro.entity;
 import java.util.List;
-import java.util.Set;
-
-import com.agro.utils.Roles;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "role")
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id")
     private int id;
 
-    @Column(name="role_name")
-    private String roleName;
-    
     @OneToMany(mappedBy="role")
     private List<User> users;
 
 	@Enumerated(EnumType.STRING)
     private Roles roleName;
-    
-    public static enum Roles {
-        ADMIN, FARMER, BUYER;
-    }
+
+    // getters and setters
+
+	public static enum Roles {
+	    ADMIN("Admin"), FARMER("Farmer"), BUYER("Buyer");
+
+	    private final String value;
+
+	    private Roles(String value) {
+	        this.value = value;
+	    }
+
+	    public String getValue() {
+	        return value;
+	    }
+	}
 
 	public int getId() {
 		return id;
@@ -38,21 +42,24 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getRoleName() {
+	public Roles getRoleName() {
 		return roleName;
 	}
 
-	public void setRoleName(String roleName) {
+	public void setRoleName(Roles roleName) {
 		this.roleName = roleName;
 	}
 
-	public Set<User> getUsers() {
+	public List<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(Set<User> users) {
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
 
+	public boolean isPresent() {
+		return true;
+	}
 
 }

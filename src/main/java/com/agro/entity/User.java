@@ -1,8 +1,5 @@
 package com.agro.entity;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,58 +9,45 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.transaction.Transactional;
 
 @Entity
 @Table(name="user")
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-@Transactional
 public class User {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name="user_id")
 	private int id;
 	
-	@Column(name="name")
 	private String name;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="gender")
 	private Gender gender;
-	
-	@Column(name="email")
 	private String email;
-	
-	@Column(name="contact_no")
 	private long contactNo;
+	public long getContactNo() {
+		return contactNo;
+	}
+	public void setContactNo(long contactNo) {
+		this.contactNo = contactNo;
+	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 	
 	private String password;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="status")
 	private Status status;
 	
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
-
-	@ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id",referencedColumnName = "id",nullable=false)
-    private Role role;
 	
-	@OneToOne(mappedBy = "User")
-    private PaymentHistory payment;
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="addr_id")
+	private Address address;
 	
 	public static enum Status{
 		ACTIVE , INACTIVE;
@@ -95,12 +79,6 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public long getContactNo() {
-		return contactNo;
-	}
-	public void setContactNo(long contactNo) {
-		this.contactNo = contactNo;
-	}
 	public String getPassword() {
 		return password;
 	}
@@ -125,6 +103,5 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-
 	
 }
