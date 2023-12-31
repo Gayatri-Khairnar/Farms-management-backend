@@ -11,11 +11,11 @@ import jakarta.transaction.Transactional;
 @Service
 public class UserRoleService {
 	
-	@Transactional
-	public void registerUserRole(User user, Role role) {
-		UserRole ur = new UserRole();
-		ur.setUser(user);
-		ur.setRole(role);
-	}
+//	@Transactional
+//	public void registerUserRole(User user, Role role) {
+//		UserRole ur = new UserRole();
+//		ur.setUser(user);
+//		ur.setRole(role);
+//	}
 
 }

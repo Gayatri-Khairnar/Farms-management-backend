@@ -9,5 +9,9 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
 	
 	@Query(value="Select * from role where role_name = ?",nativeQuery=true)
 	Role findByRoleName(String roleName);
+
 	
+	@Query(value="Select * from role where id = ?",nativeQuery=true)
+	Role findByRoleId(int roleId);
+
 }

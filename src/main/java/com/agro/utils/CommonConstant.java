@@ -17,4 +17,11 @@ public class CommonConstant {
 	
 	public static final String GENERIC_FAILURE_MESSAGE = "Oops ! Something went wrong";
 	
+	public static final String CREDENTIALS_REQUIRED = "Please enter email and password";
+	
+	public static final String USER_EMAIL_DOES_NOT_EXIST = "Login failed ! User with these email does not exists";
+	
+	public static final String PASSOWRD_INCORRECT = "Incorrect password ! Pleae try again";
+	
+	public static final String SUCCESSFUL_LOGIN = "Logged in";
 }

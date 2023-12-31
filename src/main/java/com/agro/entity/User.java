@@ -35,9 +35,8 @@ public class User {
 		this.contactNo = contactNo;
 	}
 
-	@ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+	@Column(name="role_id")
+    private int  roleId;
 	
 	private String password;
 	
@@ -97,11 +96,11 @@ public class User {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	public Role getRole() {
-		return role;
+	public int getRoleId() {
+		return roleId;
 	}
-	public void setRole(Role role) {
-		this.role = role;
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
 	}
-	
+		
 }

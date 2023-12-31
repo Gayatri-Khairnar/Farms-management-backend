@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.agro.entity.User;
 import com.agro.exception.GenricProcessException;
+import com.agro.request.LoginRequest;
 import com.agro.services.AddressService;
 import com.agro.services.RoleService;
 import com.agro.services.UserRoleService;
@@ -32,11 +33,25 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("register")
+	@PostMapping("/register")
 	public ResponseEntity<APIResponse> register(@RequestBody User user) throws GenricProcessException {
-	
-			userService.registerUser(user);			
+			System.out.println(user.getRoleId());
+			userService.registerUser(user);	
+			
 			APIResponse response = new APIResponse(true,CommonConstant.USER_SUCCESSFULLY_REGISTERED,CommonConstant.SUCCESSFUL_RESPONSE_STATUS_CODE,null);
 		    return ResponseEntity.ok(response);
+	}
+	
+	
+	@PostMapping("/login")
+	public ResponseEntity<APIResponse> login(@RequestBody LoginRequest loginRequest) throws GenricProcessException {
+			
+		if(userService.login(loginRequest)) {
+			APIResponse response = new APIResponse(true,CommonConstant.SUCCESSFUL_LOGIN,CommonConstant.SUCCESSFUL_RESPONSE_STATUS_CODE,null);
+			return ResponseEntity.ok(response);	
+		}else {
+			throw new GenricProcessException(CommonConstant.PASSOWRD_INCORRECT,CommonConstant.FAILURE_STATUS_CODE);
+		}
+			
 	}
 }

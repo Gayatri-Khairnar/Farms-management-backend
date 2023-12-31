@@ -8,14 +8,12 @@ import org.springframework.stereotype.Service;
 import com.agro.entity.Role;
 import com.agro.repository.RoleRepository;
 import com.agro.utils.Roles;
+
+import jakarta.transaction.Transactional;
 @Service
 public class RoleService {
 	@Autowired
 	private RoleRepository roleRepository;
 
-	public int registerRole(Role role) {
-		
-		Role responseRole = roleRepository.findByRoleName(role.getRoleName().getValue());
-		return responseRole.getId();
-	}
+
 }
